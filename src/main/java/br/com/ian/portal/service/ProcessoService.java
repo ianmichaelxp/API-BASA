@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import br.com.ian.portal.controller.dto.ProcessoDTO;
 import br.com.ian.portal.model.Processo;
 import br.com.ian.portal.repository.ProcessoRepository;
+import br.com.ian.portal.service.exception.RegraNegocioException;
 
 @Service
 public class ProcessoService {
@@ -28,7 +29,7 @@ public class ProcessoService {
 	public ProcessoDTO obterProcessoPorId(Long id) {
 		Optional<Processo> processo = processoRepository.findById(id);
 		if(!processo.isPresent()) {
-			throw new RuntimeException("Erro");
+			throw new RegraNegocioException("Não foi possível localizar, Processo não encontrado.");
 		}
 		return new ProcessoDTO(processo.get());
 	}
@@ -42,7 +43,7 @@ public class ProcessoService {
 	public ProcessoDTO editarProcesso(@Valid Long id, ProcessoDTO processoDTO) {
 		Optional<Processo> processo = processoRepository.findById(id);
 		if(!processo.isPresent()) {
-			throw new RuntimeException("Erro");
+			throw new RegraNegocioException("Não foi possível editar, Processo não encontrado.");
 		}
 		Processo p = processo.get();
 		p.setNumero(processoDTO.getNumero());
@@ -57,7 +58,7 @@ public class ProcessoService {
 	public void excluirProcesso(Long id) {
 		Optional<Processo> optional = processoRepository.findById(id);
 		if (!optional.isPresent()) 
-			throw new RuntimeException("Erro");
+			throw new RegraNegocioException("Não foi possível excluir, Processo não encontrado.");
 		processoRepository.deleteById(id);
 		
 	}

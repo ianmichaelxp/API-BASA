@@ -53,4 +53,12 @@ public class ProcessoService {
 		
 		return new ProcessoDTO(p);
 	}
+
+	public void excluirProcesso(Long id) {
+		Optional<Processo> optional = processoRepository.findById(id);
+		if (!optional.isPresent()) 
+			throw new RuntimeException("Erro");
+		processoRepository.deleteById(id);
+		
+	}
 }

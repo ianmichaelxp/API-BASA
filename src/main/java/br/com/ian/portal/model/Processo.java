@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 public class Processo {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PROCESSO_SEQ")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	

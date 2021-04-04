@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.ian.portal.model.Processo;
 import br.com.ian.portal.model.enums.SegredoJustica;
 import br.com.ian.portal.model.enums.Situacao;
@@ -19,6 +21,7 @@ import lombok.Setter;
 public class ProcessoDTO {
 
 	private String numero;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
 	private LocalDateTime dataCadastro;
 	private SegredoJustica segredoJustica;
 	private Situacao situacao;
@@ -41,7 +44,7 @@ public class ProcessoDTO {
 	}
 
 	public static Processo processoToEntity(@Valid ProcessoDTO dto) {
-		Processo processo = new Processo(dto.getNumero(), dto.getDataCadastro(), dto.getSegredoJustica(), dto.getSituacao(),
+		Processo processo = new Processo(dto.getNumero(), dto.getSegredoJustica(), dto.getSituacao(),
 				dto.getQtdPartes());
 		return processo;
 	}

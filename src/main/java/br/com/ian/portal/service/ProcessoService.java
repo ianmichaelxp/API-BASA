@@ -47,10 +47,10 @@ public class ProcessoService {
 		}
 		Processo p = processo.get();
 		p.setNumero(processoDTO.getNumero());
-		p.setDataCadastro(processoDTO.getDataCadastro());
 		p.setSegredoJustica(processoDTO.getSegredoJustica());
 		p.setSituacao(processoDTO.getSituacao());
 		p.setQtdPartes(processoDTO.getQtdPartes());
+		processoRepository.save(p);
 		
 		return new ProcessoDTO(p);
 	}

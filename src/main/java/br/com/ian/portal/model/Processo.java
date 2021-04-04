@@ -1,6 +1,7 @@
 package br.com.ian.portal.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import br.com.ian.portal.model.enums.SegredoJustica;
 import br.com.ian.portal.model.enums.Situacao;
@@ -38,8 +41,9 @@ public class Processo {
 	private String numero;
 	
 	@Column(name = "data_cadastro", nullable = false)
-	@NonNull
-	private LocalDateTime dataCadastro;
+//	@DateTimeFormat(pattern = "dd-mm-yy HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+	private LocalDateTime dataCadastro = LocalDateTime.now();
 	
 	@Column(name = "segredo_justica", nullable = false)
 	@Enumerated(EnumType.STRING)

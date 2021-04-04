@@ -16,7 +16,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ProcessoDTO {
 
-	private Long numero;	
+	private String numero;	
 	private LocalDateTime dataCadastro;	
 	private SegredoJustica segredoJustica;	
 	private Situacao situacao;

@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,15 +31,17 @@ public class Processo {
 	private Long id;
 	
 	@Column(name = "numero", nullable = false, length = 19)
-	private Long numero;
+	private String numero;
 	
 	@Column(name = "data_cadastro", nullable = false)
 	private LocalDateTime dataCadastro;
 	
 	@Column(name = "segredo_justica", nullable = false)
+	@Enumerated(EnumType.STRING)
 	private SegredoJustica segredoJustica;
 	
 	@Column(name = "situacao", nullable = false)
+	@Enumerated(EnumType.STRING)
 	private Situacao situacao;
 	
 	@Column(name = "qtd_partes", nullable = false)

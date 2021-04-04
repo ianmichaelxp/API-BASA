@@ -1,6 +1,9 @@
 package br.com.ian.portal.service;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +23,19 @@ public class ProcessoService {
 		List<ProcessoDTO> processoDTOs = ProcessoDTO.processoToDTO(processos);
 		return processoDTOs;
 
+	}
+
+	public ProcessoDTO obterProcessoPorId(Long id) {
+		Optional<Processo> processo = processoRepository.findById(id);
+		if(!processo.isPresent()) {
+			throw new RuntimeException("Erro");
+		}
+		return new ProcessoDTO(processo.get());
+	}
+
+	public ProcessoDTO salvarProcesso(@Valid ProcessoDTO processoDTO) {
+		Processo processo = ProcessoDTO.processoToEntity(processoDTO);
+		processoRepository.save(processo);
+		return processoDTO;
 	}
 }

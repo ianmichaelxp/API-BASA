@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,11 +16,14 @@ import br.com.ian.portal.model.enums.Situacao;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "processo")
 public class Processo {
@@ -29,18 +34,25 @@ public class Processo {
 	private Long id;
 	
 	@Column(name = "numero", nullable = false, length = 19)
-	private Long numero;
+	@NonNull
+	private String numero;
 	
 	@Column(name = "data_cadastro", nullable = false)
+	@NonNull
 	private LocalDateTime dataCadastro;
 	
 	@Column(name = "segredo_justica", nullable = false)
+	@Enumerated(EnumType.STRING)
+	@NonNull
 	private SegredoJustica segredoJustica;
 	
 	@Column(name = "situacao", nullable = false)
+	@Enumerated(EnumType.STRING)
+	@NonNull
 	private Situacao situacao;
 	
 	@Column(name = "qtd_partes", nullable = false)
+	@NonNull
 	private Integer qtdPartes;
 	
 }

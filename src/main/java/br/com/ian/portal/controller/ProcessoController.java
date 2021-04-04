@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,14 +34,20 @@ public class ProcessoController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<ProcessoDTO> obterProcesso(@PathVariable(value="id") Long id) {		
-		ProcessoDTO processoDTOs = processoService.obterProcessoPorId(id);		
-		return ResponseEntity.ok(processoDTOs);
+		ProcessoDTO processoDTO = processoService.obterProcessoPorId(id);		
+		return ResponseEntity.ok(processoDTO);
 	}
 	
 	@PostMapping
 	public ResponseEntity<ProcessoDTO> criarProcesso(@Valid @RequestBody ProcessoDTO processoDTO) throws URISyntaxException{
 		ProcessoDTO processo = processoService.salvarProcesso(processoDTO);
 		return ResponseEntity.created(new URI("/processos")).body(processo);
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<ProcessoDTO> atualizarProcesso(@PathVariable Long id, @RequestBody @Valid ProcessoDTO processoDTO) {		
+		ProcessoDTO dto = processoService.editarProcesso(id, processoDTO);
+		return ResponseEntity.ok(dto);
 	}
 	
 	

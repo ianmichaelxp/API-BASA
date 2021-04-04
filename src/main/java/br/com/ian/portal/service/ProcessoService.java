@@ -38,4 +38,19 @@ public class ProcessoService {
 		processoRepository.save(processo);
 		return processoDTO;
 	}
+	
+	public ProcessoDTO editarProcesso(@Valid Long id, ProcessoDTO processoDTO) {
+		Optional<Processo> processo = processoRepository.findById(id);
+		if(!processo.isPresent()) {
+			throw new RuntimeException("Erro");
+		}
+		Processo p = processo.get();
+		p.setNumero(processoDTO.getNumero());
+		p.setDataCadastro(processoDTO.getDataCadastro());
+		p.setSegredoJustica(processoDTO.getSegredoJustica());
+		p.setSituacao(processoDTO.getSituacao());
+		p.setQtdPartes(processoDTO.getQtdPartes());
+		
+		return new ProcessoDTO(p);
+	}
 }

@@ -1,7 +1,6 @@
 package br.com.ian.portal.model;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,7 +40,6 @@ public class Processo {
 	private String numero;
 	
 	@Column(name = "data_cadastro", nullable = false)
-//	@DateTimeFormat(pattern = "dd-mm-yy HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
 	private LocalDateTime dataCadastro = LocalDateTime.now();
 	

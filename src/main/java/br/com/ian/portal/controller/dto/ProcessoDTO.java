@@ -1,10 +1,12 @@
 package br.com.ian.portal.controller.dto;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
+
+import org.springframework.data.domain.Page;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.ian.portal.model.Processo;
 import br.com.ian.portal.model.enums.SegredoJustica;
@@ -19,6 +21,7 @@ import lombok.Setter;
 public class ProcessoDTO {
 
 	private String numero;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
 	private LocalDateTime dataCadastro;
 	private SegredoJustica segredoJustica;
 	private Situacao situacao;
@@ -32,16 +35,16 @@ public class ProcessoDTO {
 		this.qtdPartes = processo.getQtdPartes();
 	}
 
-	public static List<ProcessoDTO> processoToDTO(List<Processo> processos) {
-		List<ProcessoDTO> processosDTOs = processos.stream().map(processo -> {
+	public static Page<ProcessoDTO> processoToDTO(Page<Processo> processos) {
+		Page<ProcessoDTO> processosDTOs = processos.map(processo -> {
 			return new ProcessoDTO(processo);
-		}).collect(Collectors.toList());
+		});
 
 		return processosDTOs;
 	}
 
 	public static Processo processoToEntity(@Valid ProcessoDTO dto) {
-		Processo processo = new Processo(dto.getNumero(), dto.getDataCadastro(), dto.getSegredoJustica(), dto.getSituacao(),
+		Processo processo = new Processo(dto.getNumero(), dto.getSegredoJustica(), dto.getSituacao(),
 				dto.getQtdPartes());
 		return processo;
 	}

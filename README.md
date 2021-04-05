@@ -39,7 +39,7 @@ O Controller mapeia as rotas da API, que podem ser vistas com mais detalhes na [
 ## Situacao Enum
 - ANDAMENTO
 - ARQUIVADO
-- 
+- JULGADO
 
 # SPRING BOOT
 - A API será um Portal com funcionalidades específicas de CRUD de processos.

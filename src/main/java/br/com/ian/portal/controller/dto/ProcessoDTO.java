@@ -1,10 +1,10 @@
 package br.com.ian.portal.controller.dto;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
+
+import org.springframework.data.domain.Page;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -35,10 +35,10 @@ public class ProcessoDTO {
 		this.qtdPartes = processo.getQtdPartes();
 	}
 
-	public static List<ProcessoDTO> processoToDTO(List<Processo> processos) {
-		List<ProcessoDTO> processosDTOs = processos.stream().map(processo -> {
+	public static Page<ProcessoDTO> processoToDTO(Page<Processo> processos) {
+		Page<ProcessoDTO> processosDTOs = processos.map(processo -> {
 			return new ProcessoDTO(processo);
-		}).collect(Collectors.toList());
+		});
 
 		return processosDTOs;
 	}

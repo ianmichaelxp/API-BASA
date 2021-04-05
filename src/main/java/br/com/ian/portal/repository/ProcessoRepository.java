@@ -23,7 +23,7 @@ public interface ProcessoRepository extends JpaRepository<Processo, Long> {
 	 * O método findByFiltroSituacao permite a consulta em Banco de dados MySql
 	 * 
 	 * */
-	@Query(value = "CALL SP_SITUACAO(:p_segredo_justica);", nativeQuery = true)
+	@Query(value = "CALL SP_SITUACAO(:p_situacao);", nativeQuery = true)
 	Page<Processo> findByFiltroSitucao(@Param("p_situacao") String filtro, Pageable paginacao);
 	
 	

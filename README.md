@@ -1,4 +1,4 @@
-# Projeto Portal de Processos - Basa - Java API Restful
+# Projeto Portal de Processos - Java API Restful
 
 API de um portal de cadastro e consulta de processos judiciais.
 A documentação da API pode ser acessada em [https://{url}.herokuapp.com/swagger-ui.html](https://{url}.herokuapp.com/swagger-ui.html)
